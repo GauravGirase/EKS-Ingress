@@ -1,7 +1,15 @@
 # EKS-Ingress
 # Summary
 
-# Prerequisites
+
+## Tools
+| Tool | Version |
+| ------ | ------ |
+| awscli | aws-cli/2.34.2 |
+| eksctl | 0.224.0|
+| kubectl Drive | v1.35.2 |
+| helm | v4.1.1 |
+| docker | 29.2.1 |
 
 ## Step 1: EKS cluster provision
 eks-config.yaml

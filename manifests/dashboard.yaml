@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: app1-ns
+  name: dashboard
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dashboard
+  template:
+    metadata:
+      labels:
+        app: dashboard
+    spec:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: dashboard
+      containers:
+        - name: dashboard-containers
+          image: gauravgirase/ingress:v1.0.0
+          ports:
+            - containerPort: 5678
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard-svc
+  namespace: app1-ns
+  annotations:
+    alb.ingress.kubernetes.io/healthcheck-path: /dashboard/index.html
+spec:
+  selector:
+    app: dashboard
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5678

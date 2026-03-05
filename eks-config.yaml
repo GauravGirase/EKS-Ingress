@@ -1,0 +1,37 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: gaurav-ingress-poc
+  region: ap-south-1
+  tags:
+    owner: gaurav
+    region: ap-south-1
+    project: ingress-poc
+
+availabilityZones:
+  - ap-south-1a
+  - ap-south-1b
+
+iam:
+  withOIDC: true
+
+managedNodeGroups:
+  - name: gaurav-poc-eks-private-ng
+    instanceType: t3.small
+    minSize: 4
+    maxSize: 4
+    privateNetworking: true
+    volumeSize: 20
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+        externalDNS: false
+        certManager: true
+        ebs: false
+        efs: false
+        albIngress: true
+        xRay: false
+        cloudWatch: false
+    labels:
+      lifecycle: ec2-autoscaler

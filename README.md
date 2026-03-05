@@ -6,7 +6,13 @@ This project demonstrates a microservices deployment on Amazon EKS with Ingress 
 - Services exposed internally via ClusterIP
 - Ingress routing external traffic to services at different paths or at root /
 - AWS ALB Controller to provision ALBs dynamically
-
+## Architecture
+![architecture](/doc/architecture.png)
+## Final output
+### root path (alb-1234567890.ap-south-1.elb.amazonaws.com)
+![root-path](/doc/ingress-1.png)
+### /dashboard path (alb-1234567890.ap-south-1.elb.amazonaws.com/dashboard)
+![rdashboardh](/doc/ingress-2.png)
 ## Tools
 | Tool | Version |
 | ------ | ------ |
@@ -247,4 +253,15 @@ spec:
 ```bash
 kubectl config set-context --current --namespace app1-ns
 kubeclt apply -f manifests/
+```
+## Step 7: Verify
+### EKS cluster
+![eks-cluster](/doc/EKS-cluster.png)
+### Worker nodes
+![eks-cluster](/doc/EKS-nodes.png)
+### Workload
+![workload](/doc/resources.png)
+## Step 7: Cleanup
+```bash
+eksctl delete cluster -f eks-config.yaml
 ```

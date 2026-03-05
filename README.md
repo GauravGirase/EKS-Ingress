@@ -1,4 +1,4 @@
-# EKS-Ingress
+# EKS-Ingress (Path based routng using AWS ALB)
 # Summary
 This project demonstrates a microservices deployment on Amazon EKS with Ingress routing using AWS Load Balancer Controller (ALB). The setup includes:
 - EKS Cluster with 4 nodes
